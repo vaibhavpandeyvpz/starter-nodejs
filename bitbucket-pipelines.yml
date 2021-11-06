@@ -1,8 +1,8 @@
 image: atlassian/default-image:2
 
 pipelines:
-  custom:
-    build:
+  branches:
+    main:
       - step:
           name: Login to DockerHub
           script:
