@@ -6,7 +6,7 @@ In addition, it also includes CI pipelines configuration to build and publish Do
 
 ## Usage
 
-First make sure your have [Docker](https://www.docker.com/) installed on your workstation.
+First make sure you have [Docker](https://www.docker.com/) installed on your workstation.
 To run the project, just clone or download the project and run below command in project directory:
 
 ```shell
