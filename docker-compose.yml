@@ -1,0 +1,69 @@
+version: '3'
+
+networks:
+  project:
+
+services:
+  app:
+    build: .
+    command: npm run start:app
+    depends_on:
+      - mariadb
+      - redis
+    environment:
+      DATABASE_URL: mysql://project:project@mariadb:3306/project
+      DEBUG: starter-nodejs:*
+      NODE_ENV: development
+      QUEUE_URL: redis://redis:6379
+    healthcheck:
+      test: curl -f http://localhost:3000
+    networks:
+      project:
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  mariadb:
+    image: mariadb:10.5
+    environment:
+      MYSQL_DATABASE: project
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    networks:
+      - project
+    ports:
+      - '3306:3306'
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  redis:
+    image: redis:6-alpine
+    networks:
+      - project
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+
+  queue:
+    build: .
+    command: npm run start:queue
+    depends_on:
+      - mariadb
+      - redis
+    environment:
+      DATABASE_URL: mysql://project:project@mariadb:3306/project
+      NODE_ENV: development
+      QUEUE_URL: redis://redis:6379
+    networks:
+      project:
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  mariadb_data:
+  redis_data:
