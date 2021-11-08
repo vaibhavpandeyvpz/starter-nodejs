@@ -39,6 +39,17 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin:5
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: app
+      PMA_PASSWORD: app
+    networks:
+      - app
+    ports:
+      - '8080:80'
+
   redis:
     image: redis:6-alpine
     networks:
