@@ -4,7 +4,15 @@ Boilerplate project to kick-start projects in [Node.js](https://nodejs.org/), in
 
 In addition, it also includes CI pipelines configuration to build and publish Docker images for major hosted CI services including [Azure DevOps](https://azure.microsoft.com/en-in/services/devops/), [Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines), [Github Actions](https://github.com/features/actions) and [Travis CI](https://www.travis-ci.com/).
 
-## Usage
+## What's included?
+
+- [Express](https://expressjs.com/) app (running on [3000](http://localhost:3000/) port)
+- [Bull](https://optimalbits.github.io/bull/) job worker
+- [MariaDB](https://mariadb.org/) server (running on `3306` port)
+- [Redis](https://redis.io/) server (running on `6379` port)
+- [phpMyAdmin](https://www.phpmyadmin.net/) console (running on [8080](http://localhost:8080/) port)
+
+## How to use?
 
 First make sure your have [Docker](https://www.docker.com/) installed on your workstation.
 To run the project, just clone or download the project and run below command in project directory:
