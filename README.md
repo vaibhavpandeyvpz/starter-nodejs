@@ -9,6 +9,7 @@ In addition, it also includes CI pipelines configuration to build and publish Do
 - [Express](https://expressjs.com/) app (running on [3000](http://localhost:3000/) port)
 - [Bull](https://optimalbits.github.io/bull/) job worker
 - [MariaDB](https://mariadb.org/) server (running on `3306` port)
+- [MinIO](https://min.io/) server (running on `9000`/`9001` port)
 - [Redis](https://redis.io/) server (running on `6379` port)
 - [phpMyAdmin](https://www.phpmyadmin.net/) console (running on [8080](http://localhost:8080/) port)
 

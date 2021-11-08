@@ -39,6 +39,17 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
 
+  minio:
+    command: server /data --console-address ":9001"
+    image: minio/minio
+    networks:
+      - app
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio_data:/data
+
   phpmyadmin:
     image: phpmyadmin:5
     environment:
@@ -77,4 +88,5 @@ services:
 
 volumes:
   mariadb_data:
+  minio_data:
   redis_data:
