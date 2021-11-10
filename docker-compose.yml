@@ -13,6 +13,7 @@ services:
     environment:
       DATABASE_URL: mysql://app:app@mariadb:3306/app
       DEBUG: starter-nodejs:*
+      ELASTICSEARCH_URL: http://elasticsearch:9200
       NODE_ENV: development
       REDIS_URL: redis://redis:6379
     healthcheck:
@@ -94,6 +95,7 @@ services:
       - redis
     environment:
       DATABASE_URL: mysql://app:app@mariadb:3306/app
+      ELASTICSEARCH_URL: http://elasticsearch:9200
       NODE_ENV: development
       REDIS_URL: redis://redis:6379
     networks:
