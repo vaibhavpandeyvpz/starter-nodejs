@@ -6,7 +6,9 @@
     "express": "~4.16.1",
     "knex": "^0.95.13",
     "morgan": "~1.9.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

@@ -2,9 +2,26 @@ const express = require('express');
 
 const router = express.Router();
 
-/* GET home page. */
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: For health check.
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Returns alive = true if all good.
+ *         schema:
+ *           type: object
+ *           properties:
+ *             alive:
+ *               type: boolean
+ *     tags:
+ *       - home
+ */
 router.get('/', async (req, res) => {
-  res.send({ success: true });
+  res.send({ alive: true });
 });
 
 module.exports = router;
