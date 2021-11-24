@@ -1,8 +1,5 @@
 version: '3'
 
-networks:
-  app:
-
 services:
   app:
     build: .
@@ -10,7 +7,12 @@ services:
     depends_on:
       - mariadb
       - redis
+      - zenko
     environment:
+      AWS_ACCESS_KEY_ID: accessKey1
+      AWS_SECRET_ACCESS_KEY: verySecretKey1
+      AWS_ENDPOINT: http://zenko:8000
+      AWS_DEFAULT_REGION: us-east-1
       DATABASE_URL: mysql://app:app@mariadb:3306/app
       DEBUG: starter-nodejs:*
       ELASTICSEARCH_URL: http://elasticsearch:9200
@@ -18,8 +20,6 @@ services:
       REDIS_URL: redis://redis:6379
     healthcheck:
       test: curl -f http://localhost:3000
-    networks:
-      app:
     ports:
       - '3000:3000'
     volumes:
@@ -27,11 +27,10 @@ services:
       - /app/node_modules
 
   elasticsearch:
-    environment:
-      - discovery.type=single-node
     image: elasticsearch:7.14.0
-    networks:
-      - app
+    environment:
+      ES_JAVA_OPTS: '-Xmx512m -Xms512m'
+      discovery.type: single-node
     ports:
       - '9200:9200'
       - '9300:9300'
@@ -49,39 +48,24 @@ services:
       MYSQL_USER: app
       MYSQL_PASSWORD: app
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-    networks:
-      - app
     ports:
       - '3306:3306'
     volumes:
       - mariadb_data:/var/lib/mysql
 
-  minio:
-    command: server /data --console-address ":9001"
-    image: minio/minio
-    networks:
-      - app
-    ports:
-      - '9000:9000'
-      - '9001:9001'
-    volumes:
-      - minio_data:/data
-
   phpmyadmin:
     image: phpmyadmin:5
+    depends_on:
+      - mariadb
     environment:
       PMA_HOST: mariadb
       PMA_USER: app
       PMA_PASSWORD: app
-    networks:
-      - app
     ports:
-      - '8080:80'
+      - '9000:80'
 
   redis:
     image: redis:6-alpine
-    networks:
-      - app
     ports:
       - '6379:6379'
     volumes:
@@ -93,19 +77,36 @@ services:
     depends_on:
       - mariadb
       - redis
+      - zenko
     environment:
+      AWS_ACCESS_KEY_ID: accessKey1
+      AWS_SECRET_ACCESS_KEY: verySecretKey1
+      AWS_ENDPOINT: http://zenko:8000
+      AWS_DEFAULT_REGION: us-east-1
       DATABASE_URL: mysql://app:app@mariadb:3306/app
       ELASTICSEARCH_URL: http://elasticsearch:9200
       NODE_ENV: development
       REDIS_URL: redis://redis:6379
-    networks:
-      app:
     volumes:
       - .:/app
       - /app/node_modules
 
+  zenko:
+    image: zenko/cloudserver
+    environment:
+      ENDPOINT: zenko
+      REMOTE_MANAGEMENT_DISABLE: '1'
+      S3DATAPATH: /data
+      S3METADATAPATH: /metadata
+    ports:
+      - '8000:8000'
+    volumes:
+      - zenko_data:/data
+      - zenko_metadata:/metadata
+
 volumes:
   elasticsearch_data:
   mariadb_data:
-  minio_data:
   redis_data:
+  zenko_data:
+  zenko_metadata:

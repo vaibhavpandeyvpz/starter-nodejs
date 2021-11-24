@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@elastic/elasticsearch": "^7.15.0",
+    "aws-sdk": "^2.1035.0",
     "bull": "^4.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
