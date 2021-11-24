@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 /**
- * @openapi
+ * @swagger
  * /:
  *   get:
  *     description: For health check.

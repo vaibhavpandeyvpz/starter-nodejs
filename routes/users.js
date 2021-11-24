@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 /**
- * @openapi
+ * @swagger
  * /users:
  *   get:
  *     description: List all users.
