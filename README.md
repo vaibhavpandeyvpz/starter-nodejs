@@ -10,7 +10,7 @@ In addition, it also includes CI pipelines configuration to build and publish Do
 - [Bull](https://optimalbits.github.io/bull/) job worker
 - [Elasticsearch](https://www.elastic.co/elastic-stack/) server (running on [9200](http://localhost:9200/) and `9300` ports)
 - [MariaDB](https://mariadb.org/) server (running on `3306` port)
-- [Zenko](https://www.zenko.io/cloudserver/) server (running on `9000` and [8000](http://localhost:8000/) ports)
+- [Zenko](https://www.zenko.io/cloudserver/) server (running on `8000` port)
 - [Redis](https://redis.io/) server (running on `6379` port)
 - [phpMyAdmin](https://www.phpmyadmin.net/) console (running on [9000](http://localhost:9000/) port)
 
