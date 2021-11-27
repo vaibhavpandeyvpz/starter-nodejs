@@ -1,10 +1,11 @@
 const express = require('express');
+const { User } = require('../models');
 
 const router = express.Router();
 
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   get:
  *     description: List all users.
  *     produces:
@@ -19,12 +20,14 @@ const router = express.Router();
  *               type: array
  *             success:
  *               type: boolean
+ *     security:
+ *       - jwt: []
  *     tags:
  *       - users
  */
 router.get('/users', async (req, res) => {
   res.send({
-    data: [],
+    data: await User.findAll({ attributes: { exclude: ['password'] } }),
     success: true,
   });
 });

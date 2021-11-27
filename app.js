@@ -1,6 +1,7 @@
 const path = require('path');
 const cookies = require('cookie-parser');
 const express = require('express');
+const jwt = require('express-jwt');
 const logger = require('morgan');
 const jsdoc = require('swagger-jsdoc');
 const swagger = require('swagger-ui-express');
@@ -19,7 +20,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookies());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', require('./routes/index'));
-app.use('/api', require('./routes/users'));
+app.use('/', require('./routes/index'));
+app.use('/', require('./routes/auth'));
+app.use(
+  '/api',
+  jwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ['HS256'],
+  }),
+  require('./routes/users'),
+);
 
 module.exports = app;
