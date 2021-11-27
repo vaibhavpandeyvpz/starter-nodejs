@@ -27,6 +27,9 @@ If you wish to install new packages or run any command inside the Docker contain
 
 ```shell
 docker-compose exec app sh
+
+# run a command e.g., test cases
+npm test
 ```
 
 ## License
