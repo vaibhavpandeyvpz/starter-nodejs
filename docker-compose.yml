@@ -92,6 +92,7 @@ services:
       JWT_SECRET: not_very_secret
       NODE_ENV: development
       REDIS_URL: redis://redis:6379
+      SKIP_MIGRATIONS: 'true'
     volumes:
       - .:/app
       - /app/node_modules

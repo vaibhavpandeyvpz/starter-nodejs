@@ -4,8 +4,15 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install
+
+COPY . .
+
+COPY docker-entrypoint.sh /
+RUN chmod a+x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3000
 
