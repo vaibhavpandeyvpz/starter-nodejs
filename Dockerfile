@@ -11,7 +11,7 @@ RUN yarn install
 COPY . .
 
 COPY docker-entrypoint.sh /
-RUN chmod a+x /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3000
