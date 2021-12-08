@@ -35,7 +35,7 @@
     "postinstall": "husky install",
     "start": "node bin/www",
     "start:app": "nodemon --legacy-watch",
-    "start:queue": "node worker.js",
+    "start:worker": "node worker.js",
     "test": "mocha --recursive"
   },
   "version": "0.0.0"

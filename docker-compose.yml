@@ -73,9 +73,9 @@ services:
     volumes:
       - redis_data:/data
 
-  queue:
+  worker:
     build: .
-    command: npm run start:queue
+    command: npm run start:worker
     depends_on:
       - elasticsearch
       - mariadb
