@@ -3,5 +3,5 @@
 const path = require('path');
 
 module.exports = {
-  config: path.join(__dirname, 'common', 'db.js'),
+  config: path.join(__dirname, 'common', 'sequelize.js'),
 };

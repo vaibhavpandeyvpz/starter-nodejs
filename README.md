@@ -6,13 +6,14 @@ In addition, it also includes CI pipelines configuration to build and publish Do
 
 ## What's included?
 
-- [Express](https://expressjs.com/) app (running on [3000](http://localhost:3000/) port)
-- [Bull](https://optimalbits.github.io/bull/) job worker
+- [Bull](https://optimalbits.github.io/bull/) job queue
 - [Elasticsearch](https://www.elastic.co/elastic-stack/) server (running on [9200](http://localhost:9200/) and `9300` ports)
+- [Express](https://expressjs.com/) app (running on [3000](http://localhost:3000/) port)
+- [Inbucket](https://www.inbucket.org/) server (running on [10000](http://localhost:10000/), `1100` and `2500` ports)
 - [MariaDB](https://mariadb.org/) server (running on `3306` port)
-- [Zenko](https://www.zenko.io/cloudserver/) server (running on `8000` port)
-- [Redis](https://redis.io/) server (running on `6379` port)
 - [phpMyAdmin](https://www.phpmyadmin.net/) console (running on [9000](http://localhost:9000/) port)
+- [Redis](https://redis.io/) server (running on `6379` port)
+- [Zenko](https://www.zenko.io/cloudserver/) server (running on `8000` port)
 
 ## How to use?
 
@@ -23,7 +24,7 @@ To run the project, just clone or download the project and run below command in 
 docker-compose up -d
 ```
 
-If you wish to install new packages or run any command inside the Docker container, run below command:
+If you wish to install new packages or run any command inside the [Docker](https://www.docker.com/)  container, run below command:
 
 ```shell
 docker-compose exec app sh
