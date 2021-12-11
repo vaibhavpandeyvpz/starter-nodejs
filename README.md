@@ -7,11 +7,11 @@ In addition, it also includes CI pipelines configuration to build and publish Do
 ## What's included?
 
 - [Bull](https://optimalbits.github.io/bull/) job queue
+- Cron-style task scheduler
 - [Elasticsearch](https://www.elastic.co/elastic-stack/) server (running on [9200](http://localhost:9200/) and `9300` ports)
 - [Express](https://expressjs.com/) app (running on [3000](http://localhost:3000/) port)
 - [Inbucket](https://www.inbucket.org/) server (running on [10000](http://localhost:10000/), `1100` and `2500` ports)
 - [MariaDB](https://mariadb.org/) server (running on `3306` port)
-- Cron-style task scheduler
 - [phpMyAdmin](https://www.phpmyadmin.net/) console (running on [9000](http://localhost:9000/) port)
 - [Redis](https://redis.io/) server (running on `6379` port)
 - [Zenko](https://www.zenko.io/cloudserver/) server (running on `8000` port)
