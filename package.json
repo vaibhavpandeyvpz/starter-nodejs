@@ -13,6 +13,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
+    "node-schedule": "^2.1.0",
     "nodemailer": "^6.7.2",
     "sequelize": "^6.12.0-alpha.1",
     "sequelize-cli": "^6.3.0",
@@ -30,12 +31,13 @@
     "supertest": "^6.1.6"
   },
   "name": "starter-nodejs",
-  "description": "Boilerplate project to kick-start projects in Node.js, includes an HTTP layer, database layer, job queue along with Docker setup.",
+  "description": "Boilerplate code to kick-start projects in Node.js, includes an HTTP layer, database layer, job queue along with Docker setup.",
   "private": true,
   "scripts": {
     "postinstall": "husky install",
     "start": "node bin/www",
     "start:app": "nodemon --legacy-watch",
+    "start:schedule": "node schedule.js",
     "start:worker": "node worker.js",
     "test": "mocha --recursive"
   },

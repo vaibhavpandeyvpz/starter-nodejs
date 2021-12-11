@@ -82,6 +82,32 @@ services:
     volumes:
       - redis_data:/data
 
+  schedule:
+    build: .
+    command: npm run start:schedule
+    depends_on:
+      - elasticsearch
+      - inbucket
+      - mariadb
+      - redis
+      - zenko
+    environment:
+      AWS_ACCESS_KEY_ID: accessKey1
+      AWS_SECRET_ACCESS_KEY: verySecretKey1
+      AWS_ENDPOINT: http://zenko:8000
+      AWS_DEFAULT_REGION: us-east-1
+      DATABASE_URL: mysql://app:app@mariadb:3306/app
+      DEBUG: starter-nodejs:*
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      JWT_SECRET: not_very_secret
+      MAILER_URL: smtp://inbucket:2500
+      NODE_ENV: development
+      REDIS_URL: redis://redis:6379
+      SKIP_MIGRATIONS: 'true'
+    volumes:
+      - .:/app
+      - /app/node_modules
+
   worker:
     build: .
     command: npm run start:worker
