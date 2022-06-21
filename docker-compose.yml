@@ -8,12 +8,12 @@ services:
       - elasticsearch
       - inbucket
       - mariadb
+      - minio
       - redis
-      - zenko
     environment:
-      AWS_ACCESS_KEY_ID: accessKey1
-      AWS_SECRET_ACCESS_KEY: verySecretKey1
-      AWS_ENDPOINT: http://zenko:8000
+      AWS_ACCESS_KEY_ID: minio
+      AWS_SECRET_ACCESS_KEY: not_very_secret
+      AWS_ENDPOINT: http://minio:9000
       AWS_DEFAULT_REGION: us-east-1
       DATABASE_URL: mysql://app:app@mariadb:3306/app
       DEBUG: starter-nodejs:*
@@ -64,6 +64,18 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
 
+  minio:
+    image: minio/minio:latest
+    command: minio server /data/minio --console-address ":8900"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: not_very_secret
+    ports:
+      - '9000:9000'
+      - '8900:8900'
+    volumes:
+      - minio_data:/data/minio
+
   phpmyadmin:
     image: phpmyadmin:5
     depends_on:
@@ -73,7 +85,7 @@ services:
       PMA_USER: app
       PMA_PASSWORD: app
     ports:
-      - '9000:80'
+      - '8000:80'
 
   redis:
     image: redis:6-alpine
@@ -89,12 +101,12 @@ services:
       - elasticsearch
       - inbucket
       - mariadb
+      - minio
       - redis
-      - zenko
     environment:
-      AWS_ACCESS_KEY_ID: accessKey1
-      AWS_SECRET_ACCESS_KEY: verySecretKey1
-      AWS_ENDPOINT: http://zenko:8000
+      AWS_ACCESS_KEY_ID: minio
+      AWS_SECRET_ACCESS_KEY: not_very_secret
+      AWS_ENDPOINT: http://minio:9000
       AWS_DEFAULT_REGION: us-east-1
       DATABASE_URL: mysql://app:app@mariadb:3306/app
       DEBUG: starter-nodejs:*
@@ -115,12 +127,12 @@ services:
       - elasticsearch
       - inbucket
       - mariadb
+      - minio
       - redis
-      - zenko
     environment:
-      AWS_ACCESS_KEY_ID: accessKey1
-      AWS_SECRET_ACCESS_KEY: verySecretKey1
-      AWS_ENDPOINT: http://zenko:8000
+      AWS_ACCESS_KEY_ID: minio
+      AWS_SECRET_ACCESS_KEY: not_very_secret
+      AWS_ENDPOINT: http://minio:9000
       AWS_DEFAULT_REGION: us-east-1
       DATABASE_URL: mysql://app:app@mariadb:3306/app
       DEBUG: starter-nodejs:*
@@ -134,22 +146,8 @@ services:
       - .:/app
       - /app/node_modules
 
-  zenko:
-    image: zenko/cloudserver
-    environment:
-      ENDPOINT: zenko
-      REMOTE_MANAGEMENT_DISABLE: '1'
-      S3DATAPATH: /data
-      S3METADATAPATH: /metadata
-    ports:
-      - '8000:8000'
-    volumes:
-      - zenko_data:/data
-      - zenko_metadata:/metadata
-
 volumes:
   elasticsearch_data:
   mariadb_data:
+  minio_data:
   redis_data:
-  zenko_data:
-  zenko_metadata:
