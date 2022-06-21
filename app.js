@@ -11,7 +11,7 @@ const app = express();
 app.use(
   '/docs',
   swagger.serve,
-  swagger.setup(jsdoc(require('./swagger')), { explorer: true }),
+  swagger.setup(jsdoc(require('./swagger.config')), { explorer: true }),
 );
 
 app.use(logger('dev'));
