@@ -6,7 +6,7 @@ services:
     command: npm run start:app
     depends_on:
       - elasticsearch
-      - inbucket
+      - mailhog
       - mariadb
       - minio
       - redis
@@ -19,7 +19,7 @@ services:
       DEBUG: starter-nodejs:*
       ELASTICSEARCH_URL: http://elasticsearch:9200
       JWT_SECRET: not_very_secret
-      MAILER_URL: smtp://inbucket:2500
+      MAILER_URL: smtp://mailhog:1025
       NODE_ENV: development
       REDIS_URL: redis://redis:6379
     healthcheck:
@@ -45,12 +45,11 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
 
-  inbucket:
-    image: inbucket/inbucket
+  mailhog:
+    image: mailhog/mailhog:latest
     ports:
-      - '1100:1100'
-      - '2500:2500'
-      - '10000:9000'
+      - '1025:1025'
+      - '8025:8025'
 
   mariadb:
     image: mariadb:10.5
@@ -99,7 +98,7 @@ services:
     command: npm run start:schedule
     depends_on:
       - elasticsearch
-      - inbucket
+      - mailhog
       - mariadb
       - minio
       - redis
@@ -112,7 +111,7 @@ services:
       DEBUG: starter-nodejs:*
       ELASTICSEARCH_URL: http://elasticsearch:9200
       JWT_SECRET: not_very_secret
-      MAILER_URL: smtp://inbucket:2500
+      MAILER_URL: smtp://mailhog:1025
       NODE_ENV: development
       REDIS_URL: redis://redis:6379
       SKIP_MIGRATIONS: 'true'
@@ -125,7 +124,7 @@ services:
     command: npm run start:worker
     depends_on:
       - elasticsearch
-      - inbucket
+      - mailhog
       - mariadb
       - minio
       - redis
@@ -138,7 +137,7 @@ services:
       DEBUG: starter-nodejs:*
       ELASTICSEARCH_URL: http://elasticsearch:9200
       JWT_SECRET: not_very_secret
-      MAILER_URL: smtp://inbucket:2500
+      MAILER_URL: smtp://mailhog:1025
       NODE_ENV: development
       REDIS_URL: redis://redis:6379
       SKIP_MIGRATIONS: 'true'
